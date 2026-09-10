@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="top-header">
+        <h1>💳 Shivam Online Service</h1>
+        <p>Secure Payment</p>
+    </header>
+
+    <div class="payment-container">
+
+        <div class="payment-card">
+
+            <h2>💰 Payment करें</h2>
+
+            <div class="payment-amount">
+                <span>Payable Amount</span>
+                <strong id="paymentAmount">₹0</strong>
+            </div>
+
+            <h3>Payment Method चुनें</h3>
+
+            <div class="payment-options">
+
+                <button type="button" onclick="selectPayment('upi')">
+                    📱 UPI Payment
+                </button>
+
+                <button type="button" onclick="selectPayment('qr')">
+                    🔳 QR Code Payment
+                </button>
+
+            </div>
+
+            <div id="paymentMessage" class="payment-message">
+                Payment Method चुनें।
+            </div>
+
+        </div>
+
+        <div id="upiPaymentBox" style="display:none; margin-top:20px;">
+
+    <h3>📱 UPI Payment</h3>
+
+    <p>
+        UPI ID:
+        <strong>your.shivam@ptyes</strong>
+    </p>
+
+    <button type="button"
+        onclick="window.location.href='upi://pay?pa=your.shivam@ptyes&pn=Shivam%20Online%20Service'">
+        💳 Pay with UPI
+    </button>
+
+</div>
+
+    </div>
+
+    <script>
+
+        function selectPayment(method) {
+
+    const message = document.getElementById("paymentMessage");
+    const upiBox = document.getElementById("upiPaymentBox");
+
+    if (method === "upi") {
+
+        upiBox.style.display = "block";
+
+        message.innerHTML =
+            "📱 UPI Payment चुना गया है।";
+
+    }
+
+    if (method === "qr") {
+
+    upiBox.style.display = "none";
+
+    message.innerHTML =
+        "🔳 QR Code से Payment करें।<br><br>" +
+        "<img src='shivam-upi-qr.png' " +
+        "alt='Shivam Online Service UPI QR Code' " +
+        "style='width:220px; max-width:100%; margin:15px auto; display:block;'>" +
+        "<p>📱 अपने मोबाइल से QR Code Scan करें।</p>" +
+        "<p>UPI ID: <strong>your.shivam@ptyes</strong></p>";
+}
+}
+
+    </script>
+
+</body>
+</html>

@@ -456,7 +456,7 @@ function showAllOtherApplications() {
         box.innerHTML = html;
     }
 }
-function registerUser(event) {
+async function registerUser(event) {
     event.preventDefault();
 
     const name = document.getElementById("regName").value;
@@ -484,7 +484,27 @@ function registerUser(event) {
     walletBalance: 0,
     status: "Pending"
 };
+const supabaseUser = {
+    retailer_id: user.retailerId,
+    name: user.name,
+    mobile: user.mobile,
+    email: user.email,
+    password: user.password,
+    address: user.address,
+    wallet_balance: user.walletBalance,
+    status: user.status
+};
 
+const { error } = await supabaseClient
+    .from("retailers")
+    .insert([supabaseUser]);
+
+if (error) {
+    console.error("Supabase Registration Error:", error);
+    document.getElementById("registerMessage").innerText =
+        "❌ Registration save नहीं हो पाया।";
+    return;
+}
     let customers =
     JSON.parse(localStorage.getItem("shivamCustomers")) || [];
 
