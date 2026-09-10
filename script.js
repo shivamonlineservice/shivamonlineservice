@@ -502,7 +502,7 @@ const { error } = await supabaseClient
 if (error) {
     console.error("Supabase Registration Error:", error);
     document.getElementById("registerMessage").innerText =
-        "❌ Registration save नहीं हो पाया।";
+        "❌ " + error.message;
     return;
 }
     let customers =
