@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Address Approved - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="ekyc-header">
+
+        <div class="logo-circle">S</div>
+
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>Samagra ID में Address Approved</p>
+        </div>
+
+    </header>
+
+    <main class="ekyc-page">
+
+        <div class="ekyc-card">
+
+            <form onsubmit="submitAddressApproved(event)">
+
+                <h2>Address Approved आवेदन</h2>
+
+                <p>कृपया नीचे दी गई जानकारी भरें</p>
+
+                <div class="ekyc-field">
+                    <label for="addressName">नाम</label>
+
+                    <input
+                        type="text"
+                        id="addressName"
+                        placeholder="नाम दर्ज करें"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="addressRequestId">Request ID</label>
+
+                    <input
+                        type="text"
+                        id="addressRequestId"
+                        placeholder="9 अंकों की Request ID"
+                        maxlength="9"
+                        pattern="[0-9]{9}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="addressFamilyId">Family ID</label>
+
+                    <input
+                        type="text"
+                        id="addressFamilyId"
+                        placeholder="8 अंकों की Family ID"
+                        maxlength="8"
+                        pattern="[0-9]{8}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="ekyc-submit">
+                    आवेदन जमा करें
+                </button>
+
+                <div id="addressApprovedResult"></div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivam Online Service</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Top Support Bar -->
+    <div class="support-bar">
+        <div>
+            📞 <strong>Customer Support:</strong> 7722963447
+        </div>
+
+        <a href="https://wa.me/917722963447" target="_blank">
+            💬 WhatsApp Support
+        </a>
+    </div>
+
+
+    <!-- Main Header -->
+    <header class="home-header">
+
+        <div class="brand-area">
+
+            <img
+                src="logo.png"
+                alt="Shivam Online Service"
+                class="site-logo"
+            >
+
+            <div>
+                <h1>Shivam Online Service</h1>
+                <p>आपकी सभी ऑनलाइन सेवाएँ एक ही जगह</p>
+            </div>
+
+        </div>
+
+
+        <div class="header-buttons">
+
+            <button
+                class="login-btn"
+                onclick="openLogin()"
+            >
+                👤 Login
+            </button>
+
+            <button
+                class="register-btn"
+                onclick="openRegister()"
+            >
+                👤 Registration
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- Navigation -->
+    <nav class="home-navbar">
+
+        <a href="index.html">🏠 Home</a>
+
+        <a href="#services">📋 Services</a>
+
+        <a href="#about">ℹ️ About Us</a>
+
+        <a href="#contact">📞 Contact</a>
+
+    </nav>
+
+
+    <main>
+
+        <section class="home-hero">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+            ✨ स्वागत है हमारे पोर्टल पर
+        </span>
+
+        <h2>
+            Welcome to
+            <br>
+            <strong>Shivam Online Service</strong>
+        </h2>
+
+        <p>
+            सरकारी एवं डिजिटल ऑनलाइन सेवाओं के लिए
+            आपका भरोसेमंद सेवा पोर्टल
+        </p>
+
+        <div class="hero-features">
+
+            <span>🔒 सुरक्षित सेवा</span>
+            <span>⚡ तेज़ प्रोसेसिंग</span>
+            <span>💬 बेहतरीन सपोर्ट</span>
+
+        </div>
+
+        <button
+            class="hero-start-btn"
+            onclick="openRegister()"
+        >
+            🚀 Start Service
+        </button>
+
+    </div>
+
+</section>
+
+        <section id="services" class="services">
+            <div class="services-badge">
+    ✨ हमारी प्रमुख सेवाएँ
+</div>
+
+<h2>आपके लिए उपलब्ध ऑनलाइन सेवाएँ</h2>
+
+            <div class="service-container">
+
+                <div class="service-card">
+                    <h3>🔐 e-KYC</h3>
+                    <p>e-KYC से संबंधित ऑनलाइन सेवा</p>
+                    <button onclick="openLogin()">Apply Now</button>
+                </div>
+
+                <div class="service-card">
+                    <h3>👤 नया सदस्य</h3>
+                    <p>परिवार में नया सदस्य जोड़ने की सेवा</p>
+                   <button onclick="openLogin()">Apply Now</button>
+                </div>
+
+                <div class="service-card">
+                    <h3>👨‍👩‍👧‍👦 नया परिवार</h3>
+                    <p>नया परिवार पंजीयन सेवा</p>
+                    <button onclick="openLogin()">Apply Now</button>
+                </div>
+
+                <div class="service-card">
+                    <h3>💍 विवाह पंजीयन</h3>
+                    <p>विवाह पंजीयन आवेदन सेवा</p>
+                    <button onclick="openLogin()">Apply Now</button>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="about" class="info-section">
+            <h2>Shivam Online Service</h2>
+            <p>
+                हमारे पोर्टल के माध्यम से ग्राहक घर बैठे
+                विभिन्न ऑनलाइन सेवाओं के लिए आवेदन कर सकेंगे।
+            </p>
+        </section>
+
+    </main>
+
+    <footer id="contact">
+        <h3>Shivam Online Service</h3>
+        <p>Online Service Portal</p>
+        <p>© 2026 Shivam Online Service</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Registration Modal -->
+<div id="registerModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeRegister()">&times;</span>
+
+        <h2>Customer Registration</h2>
+        <p>Shivam Online Service पर अपना account बनाएँ</p>
+
+        <form onsubmit="registerUser(event)">
+
+            <label>पूरा नाम</label>
+            <input type="text" id="regName" placeholder="अपना पूरा नाम" required>
+
+            <label>मोबाइल नंबर</label>
+            <input type="tel" id="regMobile" placeholder="10 अंकों का मोबाइल नंबर"
+                   pattern="[0-9]{10}" maxlength="10" required>
+
+            <label>Email</label>
+            <input type="email" id="regEmail" placeholder="अपना Email">
+
+            <label>पासवर्ड</label>
+            <input type="password" id="regPassword" placeholder="पासवर्ड बनाएँ" required>
+
+            <label>Confirm Password</label>
+            <input type="password" id="regConfirmPassword"
+                   placeholder="पासवर्ड दोबारा डालें" required>
+
+            <label>पता</label>
+            <textarea id="regAddress" placeholder="अपना पूरा पता" required></textarea>
+
+            <button type="submit" class="register-submit">
+                Create Account
+            </button>
+
+        </form>
+
+        <p id="registerMessage"></p>
+
+    </div>
+
+</div>
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeLogin()">&times;</span>
+
+        <h2>Customer Login</h2>
+        <p>अपने account में login करें</p>
+
+        <form onsubmit="loginUser(event)">
+
+            <label>मोबाइल नंबर</label>
+            <input
+                type="tel"
+                id="loginMobile"
+                placeholder="10 अंकों का मोबाइल नंबर"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                required
+            >
+
+            <label>पासवर्ड</label>
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="अपना पासवर्ड डालें"
+                required
+            >
+
+            <button type="submit" class="register-submit">
+                Login
+            </button>
+
+        </form>
+
+        <p id="loginMessage"></p>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

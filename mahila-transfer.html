@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>महिला ट्रांसफर - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="ekyc-header">
+
+        <div class="logo-circle">S</div>
+
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>महिला ट्रांसफर</p>
+        </div>
+
+    </header>
+
+    <main class="ekyc-page">
+
+        <div class="ekyc-card">
+
+            <form onsubmit="submitMahilaTransfer(event)">
+
+                <h2>महिला ट्रांसफर आवेदन</h2>
+
+                <p>कृपया नीचे दी गई जानकारी भरें</p>
+
+                <div class="ekyc-field">
+                    <label for="mahilaName">महिला का नाम</label>
+
+                    <input
+                        type="text"
+                        id="mahilaName"
+                        placeholder="महिला का नाम"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="mahilaMemberId">Member ID</label>
+
+                    <input
+                        type="text"
+                        id="mahilaMemberId"
+                        placeholder="9 अंकों की Member ID"
+                        maxlength="9"
+                        pattern="[0-9]{9}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="pitaName">पिता का नाम</label>
+
+                    <input
+                        type="text"
+                        id="pitaName"
+                        placeholder="पिता का नाम"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="pitaFamilyId">पिता की Family ID</label>
+
+                    <input
+                        type="text"
+                        id="pitaFamilyId"
+                        placeholder="8 अंकों की Family ID"
+                        maxlength="8"
+                        pattern="[0-9]{8}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="ekyc-submit">
+                    आवेदन जमा करें
+                </button>
+
+                <div id="mahilaTransferResult"></div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

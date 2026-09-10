@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Retailer Registration - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="support-bar">
+        📞 Customer Support: 7722963447
+    </div>
+
+    <header class="top-header">
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>Retailer Registration</p>
+        </div>
+
+        <button onclick="window.location.href='index.html'">
+            Home
+        </button>
+    </header>
+
+    <main class="dashboard">
+
+        <section class="dashboard-welcome">
+
+            <h2>Retailer Registration</h2>
+
+            <p>
+                Retailer का नया Account बनाएँ।
+            </p>
+
+            <form onsubmit="registerRetailer(event)">
+
+                <div class="ekyc-field">
+                    <label for="retailerName">
+                        Retailer Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="retailerName"
+                        placeholder="Retailer का नाम दर्ज करें"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="retailerMobile">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="retailerMobile"
+                        placeholder="10 अंकों का Mobile Number"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="retailerPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="retailerPassword"
+                        placeholder="Password दर्ज करें"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="ekyc-submit">
+                    Retailer Registration
+                </button>
+
+                <div id="retailerRegisterMessage"></div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

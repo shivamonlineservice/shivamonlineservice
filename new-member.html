@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नया सदस्य - Shivam Online Service</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="ekyc-header">
+        <div class="logo-circle">S</div>
+
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>नया सदस्य आवेदन</p>
+        </div>
+    </header>
+<main class="ekyc-page">
+
+    <div class="ekyc-card">
+        <form onsubmit="submitNewMember(event)">
+
+        <h2>नया सदस्य आवेदन</h2>
+
+        <p>कृपया नीचे दी गई जानकारी भरें</p>
+<div class="ekyc-field">
+    <label for="memberName">सदस्य का नाम</label>
+    <input
+        type="text"
+        id="memberName"
+        placeholder="सदस्य का पूरा नाम"
+        required
+    >
+</div>
+
+<div class="ekyc-field">
+    <label for="memberMobile">मोबाइल नंबर</label>
+    <input
+        type="tel"
+        id="memberMobile"
+        placeholder="10 अंकों का मोबाइल नंबर"
+        maxlength="10"
+        required
+    >
+</div>
+
+<div class="ekyc-field">
+    <label for="fatherHusbandName">पिता/पति का नाम</label>
+    <input
+        type="text"
+        id="fatherHusbandName"
+        placeholder="पिता या पति का पूरा नाम"
+        required
+    >
+</div>
+<div class="ekyc-field">
+    <label for="memberDob">जन्म तिथि</label>
+    <input
+        type="date"
+        id="memberDob"
+        required
+    >
+</div>
+<div class="ekyc-field">
+    <label for="familyId">परिवार ID</label>
+    <input
+        type="text"
+        id="familyId"
+        placeholder="परिवार ID दर्ज करें"
+        required
+    >
+</div>
+<div class="ekyc-field">
+    <label for="memberAadhaar">आधार नंबर</label>
+    <input
+        type="text"
+        id="memberAadhaar"
+        placeholder="12 अंकों का आधार नंबर"
+        maxlength="12"
+        required
+    >
+</div>
+<div class="ekyc-field">
+    <label for="memberGender">लिंग</label>
+    <select id="memberGender" required>
+        <option value="">लिंग चुनें</option>
+        <option value="पुरुष">पुरुष</option>
+        <option value="महिला">महिला</option>
+        <option value="अन्य">अन्य</option>
+    </select>
+</div>
+<div class="ekyc-field">
+    <label for="requestId">Request ID</label>
+    <input
+        type="text"
+        id="requestId"
+        placeholder="Request ID दर्ज करें"
+        required
+    >
+</div>
+<button type="submit" class="ekyc-submit">
+    आवेदन जमा करें
+</button>
+<div id="newMemberResult"></div>
+
+</form>
+</div>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>

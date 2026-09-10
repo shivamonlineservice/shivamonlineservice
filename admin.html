@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Shivam Online Service</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="support-bar">
+        📞 Customer Support: 7722963447
+    </div>
+
+    <header class="top-header">
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>Admin Panel</p>
+        </div>
+
+        <button onclick="window.location.href='index.html'">
+            Home
+        </button>
+
+        <button onclick="adminLogout()">
+    🔒 Logout
+</button>
+    </header>
+
+    <main class="dashboard">
+
+        <section class="dashboard-welcome">
+            <h2>Welcome, shivam Admin 👨‍💼</h2>
+            <p>यहाँ से सभी Customer Applications को manage किया जाएगा।</p>
+        </section>
+
+        <section class="admin-summary">
+
+            <section class="admin-quick-actions">
+
+    <h2>⚡ Quick Actions</h2>
+
+    <div class="quick-action-grid">
+
+        <button onclick="showAdminRetailers()">
+            👥 Retailers
+        </button>
+
+        <button onclick="showAdminApplications()">
+            📋 Applications
+        </button>
+
+        <button onclick="document.querySelector('.wallet-management').scrollIntoView({behavior:'smooth'})">
+            💰 Wallet
+        </button>
+
+        <button onclick="document.querySelector('.service-management').scrollIntoView({behavior:'smooth'})">
+            ⚙️ Services
+        </button>
+
+    </div>
+
+</section>
+
+    <div class="summary-card" onclick="showRetailersFromSummary()">
+    <h3>👥</h3>
+    <h4>Total Retailers</h4>
+    <strong id="totalRetailers">0</strong>
+</div>
+
+    <div class="summary-card">
+        <h3>📋</h3>
+        <h4>Total Applications</h4>
+        <strong id="totalApplications">0</strong>
+    </div>
+
+    <div class="summary-card">
+        <h3>💰</h3>
+        <h4>Total Wallet Balance</h4>
+        <strong id="totalWallet">₹0</strong>
+    </div>
+
+    <div class="summary-card">
+        <h3>⚙️</h3>
+        <h4>Total Services</h4>
+        <strong id="totalServices">0</strong>
+    </div>
+
+</section>
+
+        <section class="dashboard-options">
+
+            <div class="option-card">
+                <h3>📋 Applications</h3>
+                <p>सभी customer applications देखें।</p>
+                <button onclick="showAdminApplications()">
+                    View Applications
+                </button>
+            </div>
+
+            <div class="option-card">
+                <h3>⚙️ Services</h3>
+                <p>Services और rates को manage करें।</p>
+                <button>
+                    Manage Services
+                </button>
+            </div>
+
+        </section>
+
+        <section class="service-management">
+
+    <h2>⚙️ Services Management</h2>
+
+    <div class="service-form">
+
+        <input
+            type="text"
+            id="serviceName"
+            placeholder="Service Name"
+        >
+
+        <input
+            type="number"
+            id="serviceRate"
+            placeholder="Service Rate"
+        >
+
+        <button onclick="addService()">
+            ➕ Add Service
+        </button>
+
+    </div>
+
+    <div id="adminServiceList">
+        अभी कोई Service नहीं है।
+    </div>
+
+</section>
+
+<section class="retailer-pricing">
+
+    <h2>💰 Retailer Wise Pricing</h2>
+
+    <div class="pricing-form">
+
+        <select id="pricingRetailer">
+            <option value="">Retailer चुनें</option>
+        </select>
+
+        <select id="pricingService">
+            <option value="">Service चुनें</option>
+        </select>
+
+        <input
+            type="number"
+            id="retailerRate"
+            placeholder="Retailer Rate"
+        >
+
+        <button onclick="saveRetailerRate()">
+            💾 Save Rate
+        </button>
+
+    </div>
+
+    <div id="retailerPricingList">
+        अभी कोई Retailer Rate सेट नहीं है।
+    </div>
+
+</section>
+
+
+<section class="wallet-management">
+
+    <h2>💰 Retailer Wallet Management</h2>
+
+    <div class="wallet-form">
+
+        <select id="walletRetailer">
+            <option value="">Retailer चुनें</option>
+        </select>
+
+        <input
+            type="number"
+            id="walletAmount"
+            placeholder="Amount"
+        >
+
+        <button onclick="addWalletMoney()">
+            ➕ Add Money
+        </button>
+
+        <button onclick="deductWalletMoney()">
+            ➖ Deduct Money
+        </button>
+
+    </div>
+
+    <div id="adminWalletList">
+        अभी कोई Wallet Data नहीं है।
+    </div>
+
+</section>
+
+<section class="wallet-history">
+
+    <h2>📋 Wallet Transaction History</h2>
+
+    <div id="walletTransactionList">
+        अभी कोई Transaction नहीं है।
+    </div>
+
+</section>
+
+
+<section class="retailer-section">
+
+    <div class="retailer-folder-header" onclick="toggleRetailerManagement()">
+        <div>
+            <h2>📁 Retailer Management</h2>
+            <p>Retailers को Manage करें</p>
+        </div>
+
+        <span id="retailerFolderArrow">▼</span>
+    </div>
+
+    <div id="retailerManagementContent" style="display:none;">
+
+    <div class="retailer-search">
+        <input
+            type="text"
+            id="retailerSearch"
+            placeholder="Retailer ID, Name या Mobile खोजें"
+        >
+
+        <button onclick="showAdminRetailers(); showRetailerPricing();">
+    🔍 Search
+</button>
+    </div>
+
+    <div id="adminRetailerList">
+        अभी कोई Retailer नहीं है।
+    </div>
+
+    </div>
+
+</section>
+
+        <section id="adminApplications" class="status-result">
+
+    <h2>📋 Customer Applications</h2>
+
+    <div id="adminApplicationList">
+        अभी कोई application नहीं है।
+    </div>
+
+</section>
+
+
+    </main>
+
+    <script>
+
+    if (localStorage.getItem("shivamAdminLoggedIn") !== "true") {
+        window.location.href = "admin-login.html";
+    }
+
+</script>
+<script>
+
+function adminLogout() {
+    localStorage.removeItem("shivamAdminLoggedIn");
+    window.location.href = "admin-login.html";
+}
+
+</script>
+    <script src="script.js"></script>
+
+</body>
+</html>

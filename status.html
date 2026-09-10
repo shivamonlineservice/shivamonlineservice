@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Application Status - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="ekyc-header">
+
+        <div class="logo-circle">
+            S
+        </div>
+
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>Application Status</p>
+        </div>
+
+    </header>
+
+
+    <main class="status-page">
+
+        <div class="status-card">
+
+            <h2>Application Status</h2>
+
+            <p>
+                अपना Application ID डालकर आवेदन की स्थिति देखें।
+            </p>
+
+
+            <form onsubmit="checkApplicationStatus(event)">
+
+                <label>Application ID</label>
+
+                <input
+                    type="text"
+                    id="statusApplicationId"
+                    placeholder="जैसे SOS-EKYC-123456"
+                    required
+                >
+
+                <button type="submit" class="ekyc-submit">
+                    Check Status
+                </button>
+
+            </form>
+
+
+            <div id="statusResult"></div>
+
+        </div>
+
+    </main>
+
+
+    <footer class="ekyc-footer">
+
+        <h3>Shivam Online Service</h3>
+
+        <p>Online Service Portal</p>
+
+        <p>© 2026 Shivam Online Service. All Rights Reserved.</p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

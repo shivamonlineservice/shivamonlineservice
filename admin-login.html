@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Shivam Online Service</title>
+    <link rel="stylesheet" href="style.css">
+</head><body class="admin-page"><div class="support-bar">
+    📞 Customer Support: 7722963447
+</div>
+
+<header class="top-header">
+    <div>
+        <h1>Shivam Online Service</h1>
+        <p>Admin Login</p>
+    </div>
+
+    <button onclick="window.location.href='index.html'">
+        Home
+    </button>
+</header>
+
+<main class="dashboard">
+
+    <section class="dashboard-welcome">
+        <h2>🔐 Admin Login</h2>
+        <p>Admin Panel खोलने के लिए Login करें।</p>
+    </section>
+
+    <section class="option-card" style="max-width:450px; margin:30px auto;">
+
+        <input
+            type="text"
+            id="adminId"
+            placeholder="Admin ID"
+            style="width:100%; padding:12px; margin-bottom:15px;"
+        >
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Password"
+            style="width:100%; padding:12px; margin-bottom:15px;"
+        >
+
+        <button onclick="adminLogin()" style="width:100%;">
+            🔐 Login
+        </button>
+
+        <p id="adminLoginMessage"></p>
+
+    </section>
+
+</main>
+
+<script>
+    function adminLogin() {
+
+        const adminId = document.getElementById("adminId").value.trim();
+        const adminPassword = document.getElementById("adminPassword").value;
+
+        if (adminId === "SHIVANGI" && adminPassword === "Shivam@2007") {
+
+            localStorage.setItem("shivamAdminLoggedIn", "true");
+
+            window.location.href = "admin.html";
+
+        } else {
+
+            document.getElementById("adminLoginMessage").innerText =
+                "❌ Admin ID या Password गलत है।";
+        }
+    }
+</script>
+
+</body>
+</html>

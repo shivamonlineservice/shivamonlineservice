@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="ekyc-header">
+
+    <div class="logo-circle">S</div>
+
+    <div>
+        <h1>Shivam Online Service</h1>
+        <p>My Applications</p>
+    </div>
+
+</header>
+
+<main class="status-page">
+
+    <div class="status-card">
+
+        <h2>मेरे आवेदन</h2>
+
+        <div id="savedApplication" class="status-result-box">
+        </div>
+
+        <div id="newMemberApplication" class="status-result-box">
+            नया सदस्य आवेदन अभी उपलब्ध नहीं है।
+        </div>
+        <div id="allOtherApplications" class="status-result-box">
+</div>
+
+
+        <button onclick="showNewMemberApplication()">
+            नया सदस्य आवेदन देखें
+        </button>
+
+        <br><br>
+
+        <button onclick="window.location.href='dashboard.html'">
+            Back to Dashboard
+        </button>
+
+    </div>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

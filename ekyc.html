@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>e-KYC Application - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="ekyc-header">
+
+        <div class="logo-circle">
+            S
+        </div>
+
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>e-KYC Application</p>
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+    <main class="ekyc-page">
+
+        <div class="ekyc-card">
+
+            <h2>e-KYC आवेदन</h2>
+
+            <div class="title-line"></div>
+
+            <p class="form-subtitle">
+                कृपया नीचे दी गई जानकारी भरें
+            </p>
+
+
+            <form onsubmit="submitEkyc(event)">
+
+                <div class="ekyc-fields">
+
+                    <!-- Name -->
+                    <div class="ekyc-field">
+
+                        <label for="ekycName">
+                            नाम
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ekycName"
+                            placeholder="पूरा नाम दर्ज करें"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Request ID -->
+                    <div class="ekyc-field">
+
+                        <label for="requestId">
+                            Request ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="requestId"
+                            placeholder="Request ID दर्ज करें"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Family ID -->
+                    <div class="ekyc-field">
+
+                        <label for="familyId">
+                            Family ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="familyId"
+                            placeholder="Family ID दर्ज करें"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="ekyc-submit">
+                    Submit Application
+                </button>
+
+            </form>
+
+
+            <div id="ekycMessage" class="ekyc-message"></div>
+            <div id="savedApplication" class="saved-application"></div>
+
+
+            <div class="security-note">
+                🔒 आपकी जानकारी सुरक्षित है और केवल सेवा के लिए उपयोग की जाएगी।
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="ekyc-footer">
+
+        <h3>Shivam Online Service</h3>
+
+        <p>Online Service Portal</p>
+
+        <p>
+            © 2026 Shivam Online Service. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

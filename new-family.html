@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>नया परिवार स्वीकृति - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="ekyc-header">
+
+        <div class="logo-circle">S</div>
+
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>नया परिवार स्वीकृति</p>
+        </div>
+
+    </header>
+
+    <main class="ekyc-page">
+
+        <div class="ekyc-card">
+
+            <form onsubmit="submitNewFamily(event)">
+
+                <h2>नया परिवार स्वीकृति आवेदन</h2>
+
+                <p>कृपया नीचे दी गई जानकारी भरें</p>
+
+                <div class="ekyc-field">
+                    <label for="familyRequestName">नाम</label>
+
+                    <input
+                        type="text"
+                        id="familyRequestName"
+                        placeholder="नाम दर्ज करें"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="familyRequestId">Request ID</label>
+
+                    <input
+                        type="text"
+                        id="familyRequestId"
+                        placeholder="9 अंकों का Request ID"
+                        maxlength="9"
+                        pattern="[0-9]{9}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="ekyc-submit">
+                    आवेदन जमा करें
+                </button>
+
+                <div id="newFamilyResult"></div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

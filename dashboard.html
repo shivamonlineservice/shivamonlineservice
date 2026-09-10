@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Dashboard - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Menu -->
+    <div class="menu-container">
+
+        <button class="menu-button" onclick="toggleMenu()">
+            ☰
+        </button>
+
+        <div id="dashboardMenu" class="dashboard-menu">
+
+            <a href="dashboard.html">🏠 Home</a>
+
+            <a href="applications.html">📄 Applications</a>
+
+            <a href="dashboard.html#customer-support">
+                📞 Customer Support
+            </a>
+
+            <a href="#" onclick="logout()">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Header -->
+    <header class="top-header">
+
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>Customer Dashboard</p>
+        </div>
+
+        <button onclick="logout()">
+            Logout
+        </button>
+
+    </header>
+
+
+    <main class="dashboard">
+
+
+        <!-- Welcome -->
+        <section class="dashboard-welcome">
+
+            <h2>
+                Welcome,
+                <span id="customerName">Customer</span> 👋
+            </h2>
+
+            <p>
+                यहाँ से आप अपनी ऑनलाइन सेवाओं के लिए आवेदन कर सकते हैं।
+            </p>
+
+            <div class="retailer-info">
+
+    <p>
+        🪪 Retailer ID:
+        <strong id="retailerIdDisplay">Loading...</strong>
+    </p>
+
+    <p>
+        📱 Mobile:
+        <strong id="retailerMobileDisplay">Loading...</strong>
+    </p>
+
+</div>
+
+<div class="wallet-box">
+    <p>💰 Wallet Balance</p>
+    <h2 id="walletBalance">₹0</h2>
+</div>
+
+        </section>
+
+
+        <!-- Online Services -->
+        <section class="dashboard-services">
+
+            <h2>Online Services</h2>
+
+            <div class="service-container">
+
+
+                <!-- e-KYC -->
+                <div class="service-card">
+
+                    <h3>e-KYC</h3>
+
+                    <p>
+                        e-KYC के लिए आवेदन करें।
+                    </p>
+
+                    <p>
+                        💰 Rate:
+                        <strong id="rate-ekyc">
+                            Loading...
+                        </strong>
+                    </p>
+
+                    <button onclick="openEkyc()">
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- New Member -->
+                <div class="service-card">
+
+                    <h3>नया सदस्य</h3>
+
+                    <p>
+                        परिवार में नया सदस्य जोड़ें।
+                    </p>
+
+                    <p>
+                        💰 Rate:
+                        <strong id="rate-new-member">
+                            Loading...
+                        </strong>
+                    </p>
+
+                    <button onclick="startApplication('नया सदस्य')">
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- New Family -->
+                <div class="service-card">
+
+                    <h3>नया परिवार</h3>
+
+                    <p>
+                        नए परिवार के लिए आवेदन करें।
+                    </p>
+
+                    <p>
+                        💰 Rate:
+                        <strong id="rate-new-family">
+                            Loading...
+                        </strong>
+                    </p>
+
+                    <button onclick="startApplication('नया परिवार')">
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- Vivah Panjiyan -->
+                <div class="service-card">
+
+                    <h3>विवाह पंजीयन</h3>
+
+                    <p>
+                        विवाह पंजीयन के लिए आवेदन करें।
+                    </p>
+
+                    <p>
+                        💰 Rate:
+                        <strong id="rate-vivah">
+                            Loading...
+                        </strong>
+                    </p>
+
+                    <button onclick="startApplication('विवाह पंजीयन')">
+                        Apply Now
+                    </button>
+
+                </div>
+                <!-- Mahila Transfer -->
+                <div class="service-card">
+
+                    <h3>महिला ट्रांसफर</h3>
+
+                    <p>
+                        महिला को पिता के परिवार से ट्रांसफर करने की सेवा
+                    </p>
+
+                    <p>
+                        💰 Rate:
+                        <strong id="rate-mahila-transfer">
+                            Loading...
+                        </strong>
+                    </p>
+
+                    <button onclick="startApplication('महिला ट्रांसफर')">
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- Address Approved -->
+                <div class="service-card">
+
+                    <h3>
+                        Samagra ID में Address Approved
+                    </h3>
+
+                    <p>
+                        Samagra ID में Address Approved की सेवा
+                    </p>
+
+                    <p>
+                        💰 Rate:
+                        <strong id="rate-address-approved">
+                            Loading...
+                        </strong>
+                    </p>
+
+                    <button onclick="startApplication('Address Approved')">
+                        Apply Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Customer Support -->
+        <section
+            class="service-card"
+            id="customer-support"
+        >
+
+            <h3>💬 Customer Support</h3>
+
+            <p>
+                किसी भी सहायता के लिए हमसे संपर्क करें।
+            </p>
+
+            <p>
+                📞 <strong>7722963447</strong>
+            </p>
+
+            <button onclick="window.location.href='tel:7722963447'">
+                📞 Call Support
+            </button>
+
+            <button
+                onclick="window.open('https://wa.me/917722963447', '_blank')"
+            >
+                💬 WhatsApp Support
+            </button>
+
+        </section>
+
+
+        <!-- Applications & Status -->
+        <section class="dashboard-options">
+
+            <div class="option-card">
+
+                <h3>📋 My Applications</h3>
+
+                <p>
+                    अपने सभी आवेदन देखें।
+                </p>
+
+                <button
+                    onclick="window.location.href='applications.html'"
+                >
+                    View Applications
+                </button>
+
+            </div>
+
+
+            <div class="option-card">
+
+                <h3>🔎 Application Status</h3>
+
+                <p>
+                    अपने आवेदन की स्थिति देखें।
+                </p>
+
+                <button onclick="checkStatus()">
+                    Check Status
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>Shivam Online Service</h3>
+
+        <p>
+            Online Service Portal
+        </p>
+
+        <p>
+            © 2026 Shivam Online Service
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+

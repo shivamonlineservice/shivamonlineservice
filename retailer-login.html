@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Retailer Login - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="support-bar">
+        📞 Customer Support: 7722963447
+    </div>
+
+    <header class="top-header">
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>Retailer Login</p>
+        </div>
+
+        <button onclick="window.location.href='index.html'">
+            Home
+        </button>
+    </header>
+
+    <main class="dashboard">
+
+        <section class="dashboard-welcome">
+
+            <h2>Retailer Login</h2>
+
+            <form onsubmit="loginRetailer(event)">
+
+                <div class="ekyc-field">
+                    <label for="retailerLoginMobile">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="retailerLoginMobile"
+                        placeholder="Mobile Number दर्ज करें"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="retailerLoginPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="retailerLoginPassword"
+                        placeholder="Password दर्ज करें"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="ekyc-submit">
+                    Login
+                </button>
+
+                <div id="retailerLoginMessage"></div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

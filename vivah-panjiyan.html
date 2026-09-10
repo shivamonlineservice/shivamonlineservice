@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>विवाह पंजीयन - Shivam Online Service</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="ekyc-header">
+
+        <div class="logo-circle">S</div>
+
+        <div>
+            <h1>Shivam Online Service</h1>
+            <p>विवाह पंजीयन</p>
+        </div>
+
+    </header>
+
+    <main class="ekyc-page">
+
+        <div class="ekyc-card">
+
+            <form onsubmit="submitVivahPanjiyan(event)">
+
+                <h2>विवाह पंजीयन आवेदन</h2>
+
+                <p>पति और पत्नी की जानकारी भरें</p>
+
+                <h3>पति की जानकारी</h3>
+
+                <div class="ekyc-field">
+                    <label for="husbandName">पति का नाम</label>
+
+                    <input
+                        type="text"
+                        id="husbandName"
+                        placeholder="पति का नाम"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="husbandMemberId">पति की Member ID</label>
+
+                    <input
+                        type="text"
+                        id="husbandMemberId"
+                        placeholder="9 अंकों का Member ID"
+                        maxlength="9"
+                        pattern="[0-9]{9}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="husbandFamilyId">पति की Family ID</label>
+
+                    <input
+                        type="text"
+                        id="husbandFamilyId"
+                        placeholder="8 अंकों का Family ID"
+                        maxlength="8"
+                        pattern="[0-9]{8}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <h3>पत्नी की जानकारी</h3>
+
+                <div class="ekyc-field">
+                    <label for="wifeName">पत्नी का नाम</label>
+
+                    <input
+                        type="text"
+                        id="wifeName"
+                        placeholder="पत्नी का नाम"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="wifeMemberId">पत्नी की Member ID</label>
+
+                    <input
+                        type="text"
+                        id="wifeMemberId"
+                        placeholder="9 अंकों का Member ID"
+                        maxlength="9"
+                        pattern="[0-9]{9}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <div class="ekyc-field">
+                    <label for="wifeFamilyId">पत्नी की Family ID</label>
+
+                    <input
+                        type="text"
+                        id="wifeFamilyId"
+                        placeholder="8 अंकों का Family ID"
+                        maxlength="8"
+                        pattern="[0-9]{8}"
+                        inputmode="numeric"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="ekyc-submit">
+                    आवेदन जमा करें
+                </button>
+
+                <div id="vivahResult"></div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
