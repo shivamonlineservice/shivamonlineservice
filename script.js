@@ -459,12 +459,12 @@ function showAllOtherApplications() {
 async function registerUser(event) {
     event.preventDefault();
 
-    const name = document.getElementById("regName").value;
-    const mobile = document.getElementById("regMobile").value;
-    const email = document.getElementById("regEmail").value;
+    const name = document.getElementById("regName").value.trim();
+    const mobile = document.getElementById("regMobile").value.trim();
+    const email = document.getElementById("regEmail").value.trim();
     const password = document.getElementById("regPassword").value;
     const confirmPassword = document.getElementById("regConfirmPassword").value;
-    const address = document.getElementById("regAddress").value;
+    const address = document.getElementById("regAddress").value.trim();
 
     if (password !== confirmPassword) {
         document.getElementById("registerMessage").innerText =
@@ -474,134 +474,131 @@ async function registerUser(event) {
 
     const retailerId = "RET-" + Date.now().toString().slice(-6);
 
-    const user = {
-    retailerId: retailerId,
-    name: name,
-    mobile: mobile,
-    email: email,
-    password: password,
-    address: address,
-    walletBalance: 0,
-    status: "Pending"
-};
-const supabaseUser = {
-    retailer_id: user.retailerId,
-    name: user.name,
-    mobile: user.mobile,
-    email: user.email,
-    password: user.password,
-    address: user.address,
-    wallet_balance: user.walletBalance,
-    status: user.status
-};
+    try {
 
-const { error } = await supabaseClient
-    .from("retailers")
-    .insert([supabaseUser]);
-
-if (error) {
-    console.error("Supabase Registration Error:", error);
-    document.getElementById("registerMessage").innerText =
-        "❌ " + error.message;
-    return;
+        // Appwrite Auth में User बनाना
+        const appwriteUser = await appwriteAccount.create(
+            Appwrite.ID.unique(),
+            email,
+            password,
+            name
+        );
+        try {
+    await appwriteAccount.deleteSession("current");
+} catch (error) {
+    // कोई active session नहीं है तो आगे जारी रखें
 }
-    let customers =
-    JSON.parse(localStorage.getItem("shivamCustomers")) || [];
 
-customers.push(user);
-
-localStorage.setItem(
-    "shivamCustomers",
-    JSON.stringify(customers)
+await appwriteAccount.createEmailPasswordSession(
+    email,
+    password
 );
 
-
-    document.getElementById("registerMessage").innerHTML =
-        "Account सफलतापूर्वक बन गया।<br>" +
-        "आपकी Retailer ID: <strong>" + retailerId + "</strong><br>" +
-        "अब Login करें।";
-}
-
-function loginUser(event) {
-    event.preventDefault();
-
-    const mobile = document.getElementById("loginMobile").value;
-    const password = document.getElementById("loginPassword").value;
-
-    const savedUsers =
-    JSON.parse(localStorage.getItem("shivamCustomers")) || [];
-
-    if (savedUsers.length === 0) {
-    document.getElementById("loginMessage").innerText =
-        "पहले Registration करें।";
-    return;
-}
-
-    const user = savedUsers.find(function (item) {
-    return mobile === item.mobile && password === item.password;
+        // Appwrite retailers table में details save करना
+        await appwriteTablesDB.createRow({
+    databaseId: "6aa4c24d00394ec85fac",
+    tableId: "retailers",
+    rowId: Appwrite.ID.unique(),
+    data: {
+        user_id: appwriteUser.$id,
+        retailer_id: retailerId,
+        name: name,
+        mobile: mobile,
+        email: email,
+        address: address,
+        wallet_balance: 0,
+        status: "Pending"
+    }
 });
 
-if (user && user.status === "Pending") {
+        // अभी LocalStorage भी रखना है
+        const user = {
+            retailerId: retailerId,
+            name: name,
+            mobile: mobile,
+            email: email,
+            password: password,
+            address: address,
+            walletBalance: 0,
+            status: "Pending"
+        };
 
-    document.getElementById("loginMessage").innerText =
-        "⏳ आपका Account अभी Admin Approval के लिए Pending है।";
+        let customers =
+            JSON.parse(localStorage.getItem("shivamCustomers")) || [];
 
-    return;
+        customers.push(user);
+
+        localStorage.setItem(
+            "shivamCustomers",
+            JSON.stringify(customers)
+        );
+
+        document.getElementById("registerMessage").innerHTML =
+            "Account सफलतापूर्वक बन गया।<br>" +
+            "आपकी Retailer ID: <strong>" + retailerId + "</strong><br>" +
+            "अब Login करें।";
+
+    } catch (error) {
+
+        console.error("Appwrite Registration Error:", error);
+
+        document.getElementById("registerMessage").innerText =
+            "❌ Registration Error: " + error.message;
+    }
 }
-if (user && user.status === "Blocked") {
 
-    document.getElementById("loginMessage").innerText =
-        "🔒 आपका Account Admin द्वारा Block किया गया है।";
+async function loginUser(event) {
+    event.preventDefault();
 
-    return;
-}
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
 
-if (user) {
+    const message = document.getElementById("loginMessage");
+
+    try {
+
+        // अगर पहले से session है तो हटाएँ
+        try {
+            await appwriteAccount.deleteSession("current");
+        } catch (error) {
+        }
+
+        // Appwrite Login
+        await appwriteAccount.createEmailPasswordSession(
+            email,
+            password
+        );
+
+        // Logged-in user की जानकारी
+        const appwriteUser = await appwriteAccount.get();
+
         localStorage.setItem("shivamLoggedIn", "true");
+        localStorage.setItem(
+            "shivamRetailerName",
+            appwriteUser.name
+        );
 
-        localStorage.setItem("shivamRetailerId", user.retailerId);
-localStorage.setItem("shivamRetailerName", user.name);
-localStorage.setItem("shivamRetailerMobile", user.mobile);
+        localStorage.setItem("shivamAppwriteUserId", appwriteUser.$id);
 
-        document.getElementById("loginMessage").innerText =
-            "Login सफलतापूर्वक हो गया।";
+        localStorage.setItem(
+            "shivamRetailerEmail",
+            appwriteUser.email
+        );
+
+        message.innerText = "✅ Login सफलतापूर्वक हो गया।";
 
         setTimeout(function () {
             window.location.href = "dashboard.html";
         }, 1000);
 
-    } else {
-        document.getElementById("loginMessage").innerText =
-            "मोबाइल नंबर या Password गलत है।";
-    }
-}
-window.addEventListener("DOMContentLoaded", function () {
-
-    const savedUsers =
-    JSON.parse(localStorage.getItem("shivamCustomers")) || [];
-
-    if (savedUsers.length === 0) {
-    return;
-}
-
-    try {
-    const retailerId = localStorage.getItem("shivamRetailerId");
-
-const user = savedUsers.find(function (item) {
-    return item.retailerId === retailerId;
-});
-
-        const customerName = document.getElementById("customerName");
-
-        if (customerName && user.name) {
-            customerName.textContent = user.name;
-        }
-
     } catch (error) {
-        console.log("Customer data error:", error);
-    }
 
-});
+        console.error("Appwrite Login Error:", error);
+
+        message.innerText =
+            "❌ Login Error: " + error.message;
+    }
+}
 function showAdminApplications() {
 
     const box = document.getElementById("adminApplicationList");
@@ -1694,7 +1691,7 @@ function loadAddressApprovedRate() {
 window.addEventListener("DOMContentLoaded", function () {
     loadAddressApprovedRate();
 });
-function loadRetailerInfo() {
+async function loadRetailerInfo() {
 
     const retailerIdBox =
         document.getElementById("retailerIdDisplay");
@@ -1704,18 +1701,60 @@ function loadRetailerInfo() {
 
     if (!retailerIdBox || !retailerMobileBox) return;
 
-    const retailerId =
-        localStorage.getItem("shivamRetailerId");
+    const userId =
+        localStorage.getItem("shivamAppwriteUserId");
 
-    const retailerMobile =
-        localStorage.getItem("shivamRetailerMobile");
+    if (!userId) {
+        retailerIdBox.innerText = "उपलब्ध नहीं";
+        retailerMobileBox.innerText = "उपलब्ध नहीं";
+        return;
+    }
+
+    try {
+
+        const result = await appwriteTablesDB.listRows({
+            databaseId: "6aa4c24d00394ec85fac",
+            tableId: "retailers"
+        });
+
+        const rows = result.rows || [];
+
+        const retailer = rows.find(function (item) {
+            return item.user_id === userId;
+        });
+
+        if (retailer) {
 
     retailerIdBox.innerText =
-        retailerId || "उपलब्ध नहीं";
+        retailer.retailer_id || "उपलब्ध नहीं";
 
     retailerMobileBox.innerText =
-        retailerMobile || "उपलब्ध नहीं";
+        retailer.mobile || "उपलब्ध नहीं";
+
+    const customerName =
+        document.getElementById("customerName");
+
+    if (customerName) {
+        customerName.innerText =
+            retailer.name || "Customer";
+    }
+
 }
+         else {
+
+            retailerIdBox.innerText = "उपलब्ध नहीं";
+            retailerMobileBox.innerText = "उपलब्ध नहीं";
+        }
+
+    } catch (error) {
+
+        console.error("Retailer Info Error:", error);
+
+        retailerIdBox.innerText = "Error";
+        retailerMobileBox.innerText = "Error";
+    }
+}
+
 
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -1724,24 +1763,78 @@ window.addEventListener("DOMContentLoaded", function () {
 function closeLogin() {
     document.getElementById("loginModal").style.display = "none";
 }
-function loadWalletBalance() {
-    const walletBox = document.getElementById("walletBalance");
+async function loadWalletBalance() {
+
+    const walletBox =
+        document.getElementById("walletBalance");
+
     if (!walletBox) return;
 
-    const retailerId =
-        localStorage.getItem("shivamRetailerId");
+    try {
 
-    const customers =
-        JSON.parse(localStorage.getItem("shivamCustomers")) || [];
+        const currentUser =
+            await appwriteAccount.get();
 
-    const user = customers.find(function (item) {
-        return item.retailerId === retailerId;
-    });
+        console.log(
+            "Current Appwrite User:",
+            currentUser.$id
+        );
 
-    if (user) {
-        walletBox.innerText =
-            "₹" + (user.walletBalance || 0);
-    } else {
+        const result =
+            await appwriteTablesDB.listRows({
+
+                databaseId:
+                    "6aa4c24d00394ec85fac",
+
+                tableId:
+                    "retailers",
+
+                queries: [
+                    Appwrite.Query.equal(
+                        "user_id",
+                        [currentUser.$id]
+                    )
+                ]
+
+            });
+
+        console.log(
+            "Wallet Appwrite Result:",
+            result
+        );
+
+        if (result.rows.length > 0) {
+
+            const retailer =
+                result.rows[0];
+
+            console.log(
+                "Wallet Balance:",
+                retailer.wallet_balance
+            );
+
+            walletBox.innerText =
+                "₹" +
+                Number(
+                    retailer.wallet_balance || 0
+                );
+
+        } else {
+
+            console.log(
+                "Retailer row नहीं मिली"
+            );
+
+            walletBox.innerText = "₹0";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Wallet Load Error:",
+            error
+        );
+
         walletBox.innerText = "₹0";
     }
 }
@@ -1804,7 +1897,8 @@ function loadWalletRetailerOptions() {
 window.addEventListener("DOMContentLoaded", function () {
     loadWalletRetailerOptions();
 });
-function addWalletMoney() {
+async function addWalletMoney() {
+
     const retailerId =
         document.getElementById("walletRetailer").value;
 
@@ -1823,42 +1917,56 @@ function addWalletMoney() {
         return;
     }
 
-    const customers =
-        JSON.parse(localStorage.getItem("shivamCustomers")) || [];
+    try {
 
-    const user = customers.find(function (item) {
-        return item.retailerId === retailerId;
-    });
+        const result = await appwriteTablesDB.listRows({
+            databaseId: "6aa4c24d00394ec85fac",
+            tableId: "retailers"
+        });
 
-    if (!user) {
-        alert("Retailer नहीं मिला।");
-        return;
+        const rows = result.rows || [];
+
+        const retailer = rows.find(function (item) {
+            return item.retailer_id === retailerId;
+        });
+
+        if (!retailer) {
+            alert("Appwrite में Retailer नहीं मिला।");
+            return;
+        }
+
+        const newBalance =
+            Number(retailer.wallet_balance || 0) + addAmount;
+
+        await appwriteTablesDB.updateRow({
+            databaseId: "6aa4c24d00394ec85fac",
+            tableId: "retailers",
+            rowId: retailer.$id,
+            data: {
+                wallet_balance: newBalance
+            }
+        });
+
+        alert(
+            "Wallet में ₹" + addAmount +
+            " सफलतापूर्वक Add हो गया।"
+        );
+
+        document.getElementById("walletAmount").value = "";
+
+        showAdminWallets();
+
+    } catch (error) {
+
+        console.error("Appwrite Wallet Error:", error);
+
+        alert(
+            "❌ Wallet Update Error: " +
+            error.message
+        );
     }
-
-    user.walletBalance =
-        Number(user.walletBalance || 0) + addAmount;
-
-        saveWalletTransaction(
-    retailerId,
-    "ADD",
-    addAmount,
-    "Admin Wallet Recharge"
-);
-
-    localStorage.setItem(
-        "shivamCustomers",
-        JSON.stringify(customers)
-    );
-
-    alert(
-        "Wallet में ₹" + addAmount +
-        " सफलतापूर्वक Add हो गया।"
-    );
-
-    document.getElementById("walletAmount").value = "";
-
-    showAdminWallets();
 }
+
 function deductWalletMoney() {
     const retailerId =
         document.getElementById("walletRetailer").value;
